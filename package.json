@@ -7,12 +7,5 @@
     "dependencies": {
         "discord.js": "^11.4.2",
         "winston": "^3.2.1"
-    },
-    "engines": {
-        "node": "10.14.0"
-      },
-    "scripts": {
-        "start": "node node.js",
-        "build": "webpack"
-      }
+    }
 }
