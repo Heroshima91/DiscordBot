@@ -1,6 +1,3 @@
-
-var auth = require('./auth.json');
-
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const messageID = "576473282136637440";
