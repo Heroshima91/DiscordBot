@@ -1,10 +1,9 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const messageID = "576473282136637440";
-const channelID = "575982744711069696";
-const nouveauID = 'Nouveau arrivant';
-const confirmeID = 'arrivant Confirmé';
-const log_channel = "576009033396518932";
+const messageID = "578223948307759154";
+const channelID = "578220755465011201";
+const nouveauID = 'Nouveau Membre';
+const log_channel = "436970167633707008";
 
 client.once('ready', () => {
     console.log('Ready!');
@@ -50,12 +49,7 @@ client.on('messageReactionAdd', (reaction, user) => {
         .addField('UserID', member.id, inline=true)
         .addField('Action', 'A accepté le CGU', inline=false)
         reaction.remove(user).then(reaction => {
-            member.removeRole(nouveau).then(()=>{
-                member.addRole(confirme).then(()=>{
-                    
-                    client.channels.get(log_channel).send(message_embed);
-                });
-            })
+            member.removeRole(nouveau);
         });
     }
     if (reaction.emoji.name == "❌") {
@@ -71,8 +65,8 @@ client.on('messageReactionAdd', (reaction, user) => {
         reaction.remove(user).then(reaction => {
             if(member.bannable == true){
                 client.channels.get(log_channel).send(message_remove).then(()=>{
-                    member.send("Vous n'avez pas accepté le réglement !").then(()=>{
-                        member.kick("No respect CGU").then(()=>{
+                    member.send("Malheureusement vous n'avez pas accepter le règlement et par conséquent vous ne pouvais pas devenir membre du Discord Metin2.fr").then(()=>{
+                        member.kick("Malheureusement vous n'avez pas accepter le règlement et par conséquent vous ne pouvais pas devenir membre du Discord Metin2.fr").then(()=>{
                         }).catch(err=>console.log);
                     });
                 });
