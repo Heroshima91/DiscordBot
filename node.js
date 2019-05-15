@@ -48,7 +48,7 @@ client.on('messageReactionAdd', (reaction, user) => {
         .addField('UserID', member.id, inline=true)
         .addField('Action', 'A accepté le CGU', inline=false)
         reaction.remove(user).then(reaction => {
-            if(member.roles.has(nouveau)){
+            if(member.roles.has(nouveau.id)){
                 member.removeRole(nouveau).then(()=>{
                         client.channels.get(log_channel).send(message_embed);
                 }).catch(err=>console.log)
