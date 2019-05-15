@@ -50,7 +50,7 @@ client.on('messageReactionAdd', (reaction, user) => {
         reaction.remove(user).then(reaction => {
             member.removeRole(nouveau).then(()=>{
                     client.channels.get(log_channel).send(message_embed);
-            })
+            }).catch(err=>console.log)
         });
     }
     if (reaction.emoji.name == "❌") {
