@@ -48,7 +48,9 @@ client.on('messageReactionAdd', (reaction, user) => {
         .addField('UserID', member.id, inline=true)
         .addField('Action', 'A accepté le CGU', inline=false)
         reaction.remove(user).then(reaction => {
-            member.removeRole(nouveau);
+            member.removeRole(nouveau).then(()=>{
+                client.channels.get(log_channel).send(message_embed)
+            });
         });
     }
     if (reaction.emoji.name == "❌") {
