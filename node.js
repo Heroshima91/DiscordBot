@@ -38,7 +38,6 @@ client.on('messageReactionAdd', (reaction, user) => {
     if (reaction.emoji.name == "✅") {
         var member = reaction.message.guild.members.find(member => member.id === user.id)
         var nouveau = reaction.message.guild.roles.find(r => r.name === nouveauID);
-        var confirme = reaction.message.guild.roles.find(r => r.name === confirmeID);
         
         const message_embed = new Discord.RichEmbed()
         .setColor('#00ff00')
