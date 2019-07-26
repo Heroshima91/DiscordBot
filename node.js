@@ -41,9 +41,9 @@ client.on('message', (receivedMessage) => {
     if (receivedMessage.author == client.user) { // Prevent bot from responding to its own messages
         return
     }
-    if(receivedMessage.channel.id == send_chan){
+    if (receivedMessage.channel.id == send_chan) {
         if (receivedMessage.content.startsWith("!")) {
-            
+
             processCommand(receivedMessage)
         }
     }
@@ -54,44 +54,44 @@ client.on('messageReactionAdd', (reaction, user) => {
     if (reaction.emoji.name == "✅") {
         var member = reaction.message.guild.members.find(member => member.id === user.id)
         var nouveau = reaction.message.guild.roles.find(r => r.name === nouveauID);
-        
+
         const message_embed = new Discord.RichEmbed()
-        .setColor('#00ff00')
-        .setAuthor(member.user.tag,member.user.avatarURL)
-        .setTimestamp()
-        .setThumbnail(member.user.avatarURL)
-        .addField('Utilisateur', member.user.username + " - " +member.user.toString(), inline=true)
-        .addField('UserID', member.id, inline=true)
-        .addField('Action', 'A accepté le CGU', inline=false)
+            .setColor('#00ff00')
+            .setAuthor(member.user.tag, member.user.avatarURL)
+            .setTimestamp()
+            .setThumbnail(member.user.avatarURL)
+            .addField('Utilisateur', member.user.username + " - " + member.user.toString(), inline = true)
+            .addField('UserID', member.id, inline = true)
+            .addField('Action', 'A accepté le CGU', inline = false)
         reaction.remove(user).then(reaction => {
-            if(member.roles.has(nouveau.id)){
-                member.removeRole(nouveau).then(()=>{
-                        client.channels.get(log_channel).send(message_embed);
-                }).catch(err=>console.log)
+            if (member.roles.has(nouveau.id)) {
+                member.removeRole(nouveau).then(() => {
+                    client.channels.get(log_channel).send(message_embed);
+                }).catch(err => console.log)
             }
         });
     }
     if (reaction.emoji.name == "❌") {
         var member = reaction.message.guild.members.find(member => member.id === user.id)
         const message_remove = new Discord.RichEmbed()
-        .setColor('#ff0000')
-        .setAuthor(member.user.tag,member.user.avatarURL)
-        .setTimestamp()
-        .setThumbnail(member.user.avatarURL)
-        .addField('Utilisateur', member.user.username + " - " +member.user.toString(), inline=true)
-        .addField('UserID', member.id, inline=true)
-        .addField('Action', 'a refusé le CGU', inline=false)
+            .setColor('#ff0000')
+            .setAuthor(member.user.tag, member.user.avatarURL)
+            .setTimestamp()
+            .setThumbnail(member.user.avatarURL)
+            .addField('Utilisateur', member.user.username + " - " + member.user.toString(), inline = true)
+            .addField('UserID', member.id, inline = true)
+            .addField('Action', 'a refusé le CGU', inline = false)
         reaction.remove(user).then(reaction => {
-            if(member.bannable == true){
-                client.channels.get(log_channel).send(message_remove).then(()=>{
-                    member.send("Malheureusement vous n'avez pas accepter le règlement et par conséquent vous ne pouvais pas devenir membre du Discord Metin2.fr").then(()=>{
-                        member.kick("Malheureusement vous n'avez pas accepter le règlement et par conséquent vous ne pouvais pas devenir membre du Discord Metin2.fr").then(()=>{
-                        }).catch(err=>console.log);
+            if (member.bannable == true) {
+                client.channels.get(log_channel).send(message_remove).then(() => {
+                    member.send("Malheureusement vous n'avez pas accepter le règlement et par conséquent vous ne pouvais pas devenir membre du Discord Metin2.fr").then(() => {
+                        member.kick("Malheureusement vous n'avez pas accepter le règlement et par conséquent vous ne pouvais pas devenir membre du Discord Metin2.fr").then(() => {
+                        }).catch(err => console.log);
                     });
                 });
             }
-            else{
-                
+            else {
+
             }
         });
 
@@ -105,64 +105,64 @@ function processCommand(receivedMessage) {
     if (primaryCommand == "bot") {
         let serveur = splitCommand[1]
         let name = splitCommand.slice(2)
-        if(serveur != null && name != null){
-        sendMessageBot(serveur,name,receivedMessage.member,receivedMessage)
-    }
+        if (Boolean(serveur) && Boolean(name)) {
+            sendMessageBot(serveur, name, receivedMessage.member, receivedMessage)
+        }
     } else if (primaryCommand == "serveur") {
         let serveur = splitCommand[1]
         let name = splitCommand.slice(2)
         let pb = name.join(" ")
-        if(serveur != null && pb != null){
-            sendMessagePb(serveur,pb,receivedMessage.member,receivedMessage)
+        if (Boolean(serveur) && Boolean(pb)) {
+            sendMessagePb(serveur, pb, receivedMessage.member, receivedMessage)
         }
     } else if (primaryCommand == "forum") {
         let name = splitCommand.slice(2)
         let pb = name.join(" ")
-        if(pb != null){
-        sendOtherMessage(pb,receivedMessage.member,receivedMessage)
+        if (Boolean(pb)) {
+            sendOtherMessage(pb, receivedMessage.member, receivedMessage)
         }
     }
     receivedMessage.delete()
 }
 
-function sendMessageBot(serveur,args,member,receivedMessage){
+function sendMessageBot(serveur, args, member, receivedMessage) {
     const message_embed = new Discord.RichEmbed()
         .setColor('#00ff00')
-        .setAuthor(member.user.tag,member.user.avatarURL)
+        .setAuthor(member.user.tag, member.user.avatarURL)
         .setTimestamp()
         .setThumbnail(member.user.avatarURL)
-        .addField('Utilisateur', member.user.username + " - " +member.user.toString(), inline=true)
-        .addField('Serveur', serveur, inline=true)
-        .addField('Nom des bots', args, inline=false)
+        .addField('Utilisateur', member.user.username + " - " + member.user.toString(), inline = true)
+        .addField('Serveur', serveur, inline = true)
+        .addField('Nom des bots', args, inline = false)
 
-    client.channels.get(modo_channel).send('<@&'+jeuId+'>');
+    client.channels.get(modo_channel).send('<@&' + jeuId + '>');
     client.channels.get(modo_channel).send(message_embed);
 }
 
-function sendMessagePb(serveur,args,member,receivedMessage){
+function sendMessagePb(serveur, args, member, receivedMessage) {
     const message_embed = new Discord.RichEmbed()
         .setColor('#00ff00')
-        .setAuthor(member.user.tag,member.user.avatarURL)
+        .setAuthor(member.user.tag, member.user.avatarURL)
         .setTimestamp()
         .setThumbnail(member.user.avatarURL)
-        .addField('Utilisateur', member.user.username + " - " +member.user.toString(), inline=true)
-        .addField('Serveur', serveur, inline=true)
-        .addField('Problème', args, inline=false)
+        .addField('Utilisateur', member.user.username + " - " + member.user.toString(), inline = true)
+        .addField('Serveur', serveur, inline = true)
+        .addField('Problème', args, inline = false)
 
-    client.channels.get(modo_channel).send('<@&'+jeuId+'>');
+    client.channels.get(modo_channel).send('<@&' + jeuId + '>');
     client.channels.get(modo_channel).send(message_embed);
 }
 
-function sendOtherMessage(args,member,receivedMessage){
+function sendOtherMessage(args, member, receivedMessage) {
     const message_embed = new Discord.RichEmbed()
         .setColor('#00ff00')
-        .setAuthor(member.user.tag,member.user.avatarURL)
+        .setAuthor(member.user.tag, member.user.avatarURL)
         .setTimestamp()
         .setThumbnail(member.user.avatarURL)
-        .addField('Utilisateur', member.user.username + " - " +member.user.toString(), inline=true)
-        .addField('Problème', args, inline=true)
+        .addField('Utilisateur', member.user.username + " - " + member.user.toString(), inline = true)
+        .addField('Problème', args, inline = true)
 
-        client.channels.get(modo_channel).send('<@&'+forumId+'>');
+    client.channels.get(modo_channel).send('<@&' + forumId + '>');
     client.channels.get(modo_channel).send(message_embed);
 }
 
