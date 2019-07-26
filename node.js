@@ -43,8 +43,10 @@ client.on('message', (receivedMessage) => {
     }
     if (receivedMessage.channel.id == send_chan) {
         if (receivedMessage.content.startsWith("!")) {
-
             processCommand(receivedMessage)
+        }
+        else{
+            receivedMessage.delete()
         }
     }
 })
