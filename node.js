@@ -103,18 +103,18 @@ function processCommand(receivedMessage) {
     if (primaryCommand == "bot") {
         let serveur = splitCommand[1]
         let name = splitCommand.slice(2)
-        sendMessage(serveur,name,receivedMessage.member)
+        sendMessage(serveur,name,receivedMessage.member,receivedMessage)
     } else if (primaryCommand == "server") {
         let serveur = splitCommand[1]
         let name = splitCommand.slice(2)
-        sendMessage(serveur,nature,receivedMessage.member)
+        sendMessage(serveur,nature,receivedMessage.member,receivedMessage)
     } else if (primaryCommand == "forum") {
         let name = splitCommand.slice(2)
-        sendOtherMessage(name,receivedMessage.member)
+        sendOtherMessage(name,receivedMessage.member,receivedMessage)
     }
 }
 
-function sendMessage(serveur,args,member){
+function sendMessage(serveur,args,member,receivedMessage){
     const message_embed = new Discord.RichEmbed()
         .setColor('#00ff00')
         .setAuthor(member.user.tag,member.user.avatarURL)
@@ -124,12 +124,12 @@ function sendMessage(serveur,args,member){
         .addField('Serveur', serveur, inline=true)
         .addField('Message', args, inline=false)
 
-    hereRole = msg.channel.server.roles.get('name','Equipe Jeu'); 
+    hereRole = receivedMessage.channel.server.roles.get('name','Equipe Jeu'); 
     client.channels.get(modo_channel).send(hereRole.toString());
     client.channels.get(modo_channel).send(message_embed);
 }
 
-function sendOtherMessage(args,member){
+function sendOtherMessage(args,member,receivedMessage){
     const message_embed = new Discord.RichEmbed()
         .setColor('#00ff00')
         .setAuthor(member.user.tag,member.user.avatarURL)
@@ -137,7 +137,7 @@ function sendOtherMessage(args,member){
         .setThumbnail(member.user.avatarURL)
         .addField('Utilisateur', member.user.username + " - " +member.user.toString(), inline=true)
         .addField('Message', args, inline=true)
-    hereRole = msg.channel.server.roles.get('name','Equipe Forum'); 
+    hereRole = receivedMessage.channel.server.roles.get('name','Equipe Forum'); 
     client.channels.get(modo_channel).send(hereRole.toString());
     client.channels.get(modo_channel).send(message_embed);
 }
