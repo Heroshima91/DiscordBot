@@ -120,6 +120,7 @@ function processCommand(receivedMessage) {
 }
 
 function sendMessageBot(serveur,args,member,receivedMessage){
+    if(args!=null){
     const message_embed = new Discord.RichEmbed()
         .setColor('#00ff00')
         .setAuthor(member.user.tag,member.user.avatarURL)
@@ -131,9 +132,11 @@ function sendMessageBot(serveur,args,member,receivedMessage){
 
     client.channels.get(modo_channel).send('<@&'+jeuId+'>');
     client.channels.get(modo_channel).send(message_embed);
+    }
 }
 
 function sendMessagePb(serveur,args,member,receivedMessage){
+    if(args!=null){
     const message_embed = new Discord.RichEmbed()
         .setColor('#00ff00')
         .setAuthor(member.user.tag,member.user.avatarURL)
@@ -145,19 +148,22 @@ function sendMessagePb(serveur,args,member,receivedMessage){
 
     client.channels.get(modo_channel).send('<@&'+jeuId+'>');
     client.channels.get(modo_channel).send(message_embed);
+    }
 }
 
 function sendOtherMessage(args,member,receivedMessage){
-    const message_embed = new Discord.RichEmbed()
-        .setColor('#00ff00')
-        .setAuthor(member.user.tag,member.user.avatarURL)
-        .setTimestamp()
-        .setThumbnail(member.user.avatarURL)
-        .addField('Utilisateur', member.user.username + " - " +member.user.toString(), inline=true)
-        .addField('Problème', args, inline=true)
+    if(args!=null){
+        const message_embed = new Discord.RichEmbed()
+            .setColor('#00ff00')
+            .setAuthor(member.user.tag,member.user.avatarURL)
+            .setTimestamp()
+            .setThumbnail(member.user.avatarURL)
+            .addField('Utilisateur', member.user.username + " - " +member.user.toString(), inline=true)
+            .addField('Problème', args, inline=true)
 
-        client.channels.get(modo_channel).send('<@&'+forumId+'>');
-    client.channels.get(modo_channel).send(message_embed);
+            client.channels.get(modo_channel).send('<@&'+forumId+'>');
+        client.channels.get(modo_channel).send(message_embed);
+}
 }
 
 client.login(process.env.TOKEN);
