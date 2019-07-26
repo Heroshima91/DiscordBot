@@ -105,22 +105,27 @@ function processCommand(receivedMessage) {
     if (primaryCommand == "bot") {
         let serveur = splitCommand[1]
         let name = splitCommand.slice(2)
+        if(serveur != null && name != null){
         sendMessageBot(serveur,name,receivedMessage.member,receivedMessage)
+    }
     } else if (primaryCommand == "serveur") {
         let serveur = splitCommand[1]
         let name = splitCommand.slice(2)
         let pb = name.join(" ")
-        sendMessagePb(serveur,pb,receivedMessage.member,receivedMessage)
+        if(serveur != null && pb != null){
+            sendMessagePb(serveur,pb,receivedMessage.member,receivedMessage)
+        }
     } else if (primaryCommand == "forum") {
         let name = splitCommand.slice(2)
         let pb = name.join(" ")
+        if(serveur != null && pb != null){
         sendOtherMessage(pb,receivedMessage.member,receivedMessage)
+        }
     }
     receivedMessage.delete()
 }
 
 function sendMessageBot(serveur,args,member,receivedMessage){
-    if(args!=null){
     const message_embed = new Discord.RichEmbed()
         .setColor('#00ff00')
         .setAuthor(member.user.tag,member.user.avatarURL)
@@ -132,11 +137,9 @@ function sendMessageBot(serveur,args,member,receivedMessage){
 
     client.channels.get(modo_channel).send('<@&'+jeuId+'>');
     client.channels.get(modo_channel).send(message_embed);
-    }
 }
 
 function sendMessagePb(serveur,args,member,receivedMessage){
-    if(args!=null){
     const message_embed = new Discord.RichEmbed()
         .setColor('#00ff00')
         .setAuthor(member.user.tag,member.user.avatarURL)
@@ -148,22 +151,19 @@ function sendMessagePb(serveur,args,member,receivedMessage){
 
     client.channels.get(modo_channel).send('<@&'+jeuId+'>');
     client.channels.get(modo_channel).send(message_embed);
-    }
 }
 
 function sendOtherMessage(args,member,receivedMessage){
-    if(args!=null){
-        const message_embed = new Discord.RichEmbed()
-            .setColor('#00ff00')
-            .setAuthor(member.user.tag,member.user.avatarURL)
-            .setTimestamp()
-            .setThumbnail(member.user.avatarURL)
-            .addField('Utilisateur', member.user.username + " - " +member.user.toString(), inline=true)
-            .addField('Problème', args, inline=true)
+    const message_embed = new Discord.RichEmbed()
+        .setColor('#00ff00')
+        .setAuthor(member.user.tag,member.user.avatarURL)
+        .setTimestamp()
+        .setThumbnail(member.user.avatarURL)
+        .addField('Utilisateur', member.user.username + " - " +member.user.toString(), inline=true)
+        .addField('Problème', args, inline=true)
 
-            client.channels.get(modo_channel).send('<@&'+forumId+'>');
-        client.channels.get(modo_channel).send(message_embed);
-}
+        client.channels.get(modo_channel).send('<@&'+forumId+'>');
+    client.channels.get(modo_channel).send(message_embed);
 }
 
 client.login(process.env.TOKEN);
