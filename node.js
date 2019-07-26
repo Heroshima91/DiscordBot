@@ -100,20 +100,20 @@ function processCommand(receivedMessage) {
     let fullCommand = receivedMessage.content.substr(1) // Remove the leading exclamation mark
     let splitCommand = fullCommand.split(" ") // Split the message up in to pieces for each space
     let primaryCommand = splitCommand[0] // The first word directly after the exclamation is the command
-    let arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
+    let next = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
 
     if (primaryCommand == "bot") {
-        let sep = arguments.split(" ")
+        let sep = next.split(" ")
         let serveur = sep[0]
         let name = sep.slice(1)
         sendMessage(serveur,name,receivedMessage.member)
     } else if (primaryCommand == "server") {
-        let sep = arguments.split(" ")
+        let sep = next.split(" ")
         let serveur = sep[0]
         let nature = sep.slice(1)
         sendMessage(serveur,nature,receivedMessage.member)
     } else if (primaryCommand == "forum") {
-        sendOtherMessage(arguments,receivedMessage.member)
+        sendOtherMessage(next,receivedMessage.member)
     }
 }
 
