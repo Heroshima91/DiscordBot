@@ -6,6 +6,8 @@ const nouveauID = 'Nouveau Membre';
 const log_channel = "436970167633707008";
 const send_chan = "602234283159060500";
 const modo_channel = "601549417496969236";
+const jeuId = "537367345417682958";
+const forumId = "537367543044636682";
 
 client.once('ready', () => {
     console.log('Ready!');
@@ -103,18 +105,20 @@ function processCommand(receivedMessage) {
     if (primaryCommand == "bot") {
         let serveur = splitCommand[1]
         let name = splitCommand.slice(2)
-        sendMessage(serveur,name,receivedMessage.member,receivedMessage)
-    } else if (primaryCommand == "server") {
+        sendMessageBot(serveur,name,receivedMessage.member,receivedMessage)
+    } else if (primaryCommand == "serveur") {
         let serveur = splitCommand[1]
         let name = splitCommand.slice(2)
-        sendMessage(serveur,nature,receivedMessage.member,receivedMessage)
+        let pb = name.join(" ")
+        sendMessagePb(serveur,pb,receivedMessage.member,receivedMessage)
     } else if (primaryCommand == "forum") {
         let name = splitCommand.slice(2)
-        sendOtherMessage(name,receivedMessage.member,receivedMessage)
+        let pb = name.join(" ")
+        sendOtherMessage(pb,receivedMessage.member,receivedMessage)
     }
 }
 
-function sendMessage(serveur,args,member,receivedMessage){
+function sendMessageBot(serveur,args,member,receivedMessage){
     const message_embed = new Discord.RichEmbed()
         .setColor('#00ff00')
         .setAuthor(member.user.tag,member.user.avatarURL)
@@ -122,10 +126,23 @@ function sendMessage(serveur,args,member,receivedMessage){
         .setThumbnail(member.user.avatarURL)
         .addField('Utilisateur', member.user.username + " - " +member.user.toString(), inline=true)
         .addField('Serveur', serveur, inline=true)
-        .addField('Message', args, inline=false)
+        .addField('Nom des bots', args, inline=false)
 
-    client.channels.get(modo_channel).send('<@537367345417682958>');
-    client.channels.get(modo_channel).send('<@&537367345417682958>');
+    client.channels.get(modo_channel).send('<@&+""+>');
+    client.channels.get(modo_channel).send(message_embed);
+}
+
+function sendMessagePb(serveur,args,member,receivedMessage){
+    const message_embed = new Discord.RichEmbed()
+        .setColor('#00ff00')
+        .setAuthor(member.user.tag,member.user.avatarURL)
+        .setTimestamp()
+        .setThumbnail(member.user.avatarURL)
+        .addField('Utilisateur', member.user.username + " - " +member.user.toString(), inline=true)
+        .addField('Serveur', serveur, inline=true)
+        .addField('Problème', args, inline=false)
+
+    client.channels.get(modo_channel).send('<@&'+jeuId+'>');
     client.channels.get(modo_channel).send(message_embed);
 }
 
@@ -136,10 +153,9 @@ function sendOtherMessage(args,member,receivedMessage){
         .setTimestamp()
         .setThumbnail(member.user.avatarURL)
         .addField('Utilisateur', member.user.username + " - " +member.user.toString(), inline=true)
-        .addField('Message', args, inline=true)
+        .addField('Problème', args, inline=true)
 
-    client.channels.get(modo_channel).send('<@537367345417682958>');
-    client.channels.get(modo_channel).send('<@&537367345417682958>');
+        client.channels.get(modo_channel).send('<@&'+forumId+'>');
     client.channels.get(modo_channel).send(message_embed);
 }
 
