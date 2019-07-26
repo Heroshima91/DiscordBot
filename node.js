@@ -44,11 +44,7 @@ client.on('message', (receivedMessage) => {
     if(receivedMessage.channel.id == send_chan){
         if (receivedMessage.content.startsWith("!")) {
             
-            processCommand(receivedMessage).then(
-                ()=>{
-                    receivedMessage.delete();
-                }
-            )
+            processCommand(receivedMessage)
         }
     }
 })
@@ -120,6 +116,7 @@ function processCommand(receivedMessage) {
         let pb = name.join(" ")
         sendOtherMessage(pb,receivedMessage.member,receivedMessage)
     }
+    receivedMessage.delete()
 }
 
 function sendMessageBot(serveur,args,member,receivedMessage){
