@@ -129,7 +129,7 @@ function sendMessageBot(serveur,args,member,receivedMessage){
         .addField('Serveur', serveur, inline=true)
         .addField('Nom des bots', args, inline=false)
 
-    client.channels.get(modo_channel).send('<@&+""+>');
+    client.channels.get(modo_channel).send('<@&'+jeuId+'>');
     client.channels.get(modo_channel).send(message_embed);
 }
 
