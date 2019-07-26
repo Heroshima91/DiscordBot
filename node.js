@@ -116,7 +116,7 @@ function processCommand(receivedMessage) {
             sendMessagePb(serveur, pb, receivedMessage.member, receivedMessage)
         }
     } else if (primaryCommand == "forum") {
-        let name = splitCommand.slice(2)
+        let name = splitCommand.slice(1)
         let pb = name.join(" ")
         if (Boolean(pb)) {
             sendOtherMessage(pb, receivedMessage.member, receivedMessage)
