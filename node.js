@@ -124,7 +124,6 @@ function sendMessage(serveur,args,member,receivedMessage){
         .addField('Serveur', serveur, inline=true)
         .addField('Message', args, inline=false)
 
-    hereRole = receivedMessage.channel.server.roles.get('name','Equipe Jeu'); 
     client.channels.get(modo_channel).send('<@537367345417682958>');
     client.channels.get(modo_channel).send('<@&537367345417682958>');
     client.channels.get(modo_channel).send(message_embed);
@@ -138,7 +137,7 @@ function sendOtherMessage(args,member,receivedMessage){
         .setThumbnail(member.user.avatarURL)
         .addField('Utilisateur', member.user.username + " - " +member.user.toString(), inline=true)
         .addField('Message', args, inline=true)
-    hereRole = receivedMessage.channel.server.roles.get('name','Equipe Forum'); 
+
     client.channels.get(modo_channel).send('<@537367345417682958>');
     client.channels.get(modo_channel).send('<@&537367345417682958>');
     client.channels.get(modo_channel).send(message_embed);
