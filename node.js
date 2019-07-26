@@ -4,6 +4,8 @@ const messageID = "578223948307759154";
 const channelID = "578220755465011201";
 const nouveauID = 'Nouveau Membre';
 const log_channel = "436970167633707008";
+const send_chan = "602234283159060500";
+const modo_channel = "601549417496969236";
 
 client.once('ready', () => {
     console.log('Ready!');
@@ -32,6 +34,18 @@ client.on('raw', async event => {
     }
     client.emit(events[event.t], reaction, user);
 });
+
+client.on('message', (receivedMessage) => {
+    if (receivedMessage.author == client.user) { // Prevent bot from responding to its own messages
+        return
+    }
+    if(receivedMessage.channel.id == send_chan){
+        if (receivedMessage.content.startsWith("!")) {
+            
+            processCommand(receivedMessage)
+        }
+    }
+})
 
 client.on('messageReactionAdd', (reaction, user) => {
 
@@ -81,5 +95,54 @@ client.on('messageReactionAdd', (reaction, user) => {
 
     }
 });
+
+function processCommand(receivedMessage) {
+    let fullCommand = receivedMessage.content.substr(1) // Remove the leading exclamation mark
+    let splitCommand = fullCommand.split(" ") // Split the message up in to pieces for each space
+    let primaryCommand = splitCommand[0] // The first word directly after the exclamation is the command
+    let arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
+
+    if (primaryCommand == "bot") {
+        let sep = arguments.split(" ")
+        let serveur = sep[0]
+        let name = sep.slice(1)
+        sendMessage(serveur,name,receivedMessage.member)
+    } else if (primaryCommand == "server") {
+        let sep = arguments.split(" ")
+        let serveur = sep[0]
+        let nature = sep.slice(1)
+        sendMessage(serveur,nature,receivedMessage.member)
+    } else if (primaryCommand == "forum") {
+        sendOtherMessage(arguments,receivedMessage.member)
+    }
+}
+
+function sendMessage(serveur,args,member){
+    const message_embed = new Discord.RichEmbed()
+        .setColor('#00ff00')
+        .setAuthor(member.user.tag,member.user.avatarURL)
+        .setTimestamp()
+        .setThumbnail(member.user.avatarURL)
+        .addField('Utilisateur', member.user.username + " - " +member.user.toString(), inline=true)
+        .addField('Serveur', serveur, inline=true)
+        .addField('Message', args, inline=false)
+
+    hereRole = msg.channel.server.roles.get('name','Equipe Jeu'); 
+    client.channels.get(modo_channel).send(hereRole.toString());
+    client.channels.get(modo_channel).send(message_embed);
+}
+
+function sendOtherMessage(args,member){
+    const message_embed = new Discord.RichEmbed()
+        .setColor('#00ff00')
+        .setAuthor(member.user.tag,member.user.avatarURL)
+        .setTimestamp()
+        .setThumbnail(member.user.avatarURL)
+        .addField('Utilisateur', member.user.username + " - " +member.user.toString(), inline=true)
+        .addField('Message', args, inline=true)
+    hereRole = msg.channel.server.roles.get('name','Equipe Forum'); 
+    client.channels.get(modo_channel).send(hereRole.toString());
+    client.channels.get(modo_channel).send(message_embed);
+}
 
 client.login(process.env.TOKEN);
