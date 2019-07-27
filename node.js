@@ -151,7 +151,7 @@ function sendMessagePb(serveur, args, member, receivedMessage) {
         .addField('Serveur', serveur, inline = true)
         .addField('Problème', args, inline = false)
 
-    //client.channels.get(modo_channel).send('<@&' + jeuId + '>');
+    client.channels.get(modo_channel).send('<@&' + jeuId + '>');
     client.channels.get(modo_channel).send(message_embed);
 }
 
@@ -164,7 +164,7 @@ function sendOtherMessage(args, member, receivedMessage) {
         .addField('Utilisateur', member.user.username + " - " + member.user.toString(), inline = true)
         .addField('Problème', args, inline = true)
 
-    //client.channels.get(modo_channel).send('<@&' + forumId + '>');
+    client.channels.get(modo_channel).send('<@&' + forumId + '>');
     client.channels.get(modo_channel).send(message_embed);
 }
 
