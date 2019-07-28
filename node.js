@@ -107,7 +107,7 @@ function processCommand(receivedMessage) {
     if (primaryCommand == "bot") {
         let serveur = splitCommand[1]
         let name = splitCommand.slice(2)
-        if (Boolean(serveur) && Boolean(name)) {
+        if (Boolean(serveur) && !(name === undefined || name.length == 0)) {
             sendMessageBot(serveur, name, receivedMessage.member, receivedMessage)
         }
     } else if (primaryCommand == "serveur") {
