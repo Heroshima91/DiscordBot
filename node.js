@@ -58,7 +58,7 @@ client.on('message', (receivedMessage) => {
             client.setTimeout(function () {
 				// Creates the message
 				var content = "COUCOU JE SPAM"
-				message.reply(content);
+				client.reply(content);
 				console.log('Message sent to');
 			}, 1000)
 		} catch (e) {
