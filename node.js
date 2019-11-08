@@ -51,22 +51,10 @@ client.on('message', (receivedMessage) => {
         }
     }
     if (receivedMessage.channel.id == uprising){
-	    console.log('okk');
         if (receivedMessage.content.startsWith("!remindermatin")) {
-		console.log('ok');
-	try{
-            setInterval(function () {
-		    		console.log('okkk');
-				// Creates the message
-				var content = "Bonjour citoyen, n'oublie pas de récupérer ta médaille de bravoure dans l'onglet guilde aujourd'hui et de donner de l'expérience ! Bonne route... "
-				client.channels.get(uprising).send(content);
-			}, 5*1000)
-		} catch (e) {
-			receivedMessage.reply("An error has occured, please make sure the command has a time delimiter and message");
-			console.error(e.toString());
-		}
-
-        }
+		 upmessage(client,receivedMessage)
+	}
+	
     }
 	
     if (receivedMessage.channel.id == uprising){
@@ -174,6 +162,18 @@ function sendMessageBot(serveur, args, member, receivedMessage) {
 
     //client.channels.get(modo_channel).send('<@&' + jeuId + '>');
     client.channels.get(modo_channel).send(message_embed);
+}
+
+function upmessage(client,receivedMessage) {
+	try{
+		var content = "Bonjour citoyen, n'oublie pas de récupérer ta médaille de bravoure dans l'onglet guilde aujourd'hui et de donner de l'expérience ! Bonne route... "
+		client.channels.get(uprising).send(content);
+	} catch (e) {
+		receivedMessage.reply("An error has occured, please make sure the command has a time delimiter and message");
+		console.error(e.toString());
+	}
+	
+    setInterval(upmessage(client,receivedMessage),5*1000);
 }
 
 function sendMessagePb(serveur, args, member, receivedMessage) {
