@@ -51,9 +51,12 @@ client.on('message', (receivedMessage) => {
         }
     }
     if (receivedMessage.channel.id == uprising){
+	    console.log('okk');
         if (receivedMessage.content.startsWith("!remindermatin")) {
+		console.log('ok');
 	try{
             setInterval(function () {
+		    		console.log('okkk');
 				// Creates the message
 				var content = "Bonjour citoyen, n'oublie pas de récupérer ta médaille de bravoure dans l'onglet guilde aujourd'hui et de donner de l'expérience ! Bonne route... "
 				client.channels.get(uprising).send(content);
