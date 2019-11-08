@@ -60,7 +60,7 @@ client.on('message', (receivedMessage) => {
 				var content = "COUCOU JE SPAM"
 				message.reply(content);
 				console.log('Message sent to');
-			}, 1000*60)
+			}, 1000)
 		} catch (e) {
 			message.reply("An error has occured, please make sure the command has a time delimiter and message");
 			console.error(e.toString());
