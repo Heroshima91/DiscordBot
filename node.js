@@ -51,7 +51,9 @@ client.on('message', (receivedMessage) => {
         }
     }
     if (receivedMessage.channel.id == uprising){
+	console.log("received")
         if (receivedMessage.content.startsWith("!remindergo")) {
+		console.log("yes")
 	try{
             client.setTimeout(function () {
 				// Creates the message
