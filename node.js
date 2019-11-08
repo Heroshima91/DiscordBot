@@ -52,6 +52,7 @@ client.on('message', (receivedMessage) => {
     }
     if (receivedMessage.channel.id == uprising){
         if (receivedMessage.content.startsWith("!remindergo")) {
+	try{
             client.setTimeout(function () {
 				// Creates the message
 				var content = "COUCOU JE SPAM"
