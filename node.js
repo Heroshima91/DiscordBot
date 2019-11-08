@@ -55,7 +55,7 @@ client.on('message', (receivedMessage) => {
         if (receivedMessage.content.startsWith("!remindergo")) {
 		console.log("yes")
 	try{
-            setTimeout(function () {
+            setInterval(function () {
 				// Creates the message
 				var content = "COUCOU JE SPAM"
 				receivedMessage.reply(content);
