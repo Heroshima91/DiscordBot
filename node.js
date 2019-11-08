@@ -8,6 +8,7 @@ const send_chan = "602234283159060500";
 const modo_channel = "601549417496969236";
 const jeuId = "537367345417682958";
 const forumId = "537367543044636682";
+const uprising = "483986745814155265";
 
 client.once('ready', () => {
     console.log('Ready!');
@@ -47,6 +48,21 @@ client.on('message', (receivedMessage) => {
         }
         else{
             receivedMessage.delete()
+        }
+    }
+    if (receivedMessage.channel.id == uprising){
+        if (receivedMessage.content.startsWith("!remindergo")) {
+            client.setTimeout(function () {
+				// Creates the message
+				var content = "COUCOU JE SPAM"
+				message.reply(content);
+				console.log('Message sent to');
+			}, 1000*60)
+		} catch (e) {
+			message.reply("An error has occured, please make sure the command has a time delimiter and message");
+			console.error(e.toString());
+		}
+
         }
     }
 })
