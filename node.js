@@ -58,11 +58,11 @@ client.on('message', (receivedMessage) => {
             client.setTimeout(function () {
 				// Creates the message
 				var content = "COUCOU JE SPAM"
-				client.reply(content);
+				receivedMessage.reply(content);
 				console.log('Message sent to');
 			}, 1000)
 		} catch (e) {
-			message.reply("An error has occured, please make sure the command has a time delimiter and message");
+			receivedMessage.reply("An error has occured, please make sure the command has a time delimiter and message");
 			console.error(e.toString());
 		}
 
