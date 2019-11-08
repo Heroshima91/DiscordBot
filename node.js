@@ -59,7 +59,7 @@ client.on('message', (receivedMessage) => {
 				// Creates the message
 				var content = "Bonjour citoyen, n'oublie pas de récupérer ta médaille de bravoure dans l'onglet guilde aujourd'hui et de donner de l'expérience ! Bonne route... "
 				client.channels.get(uprising).send(content);
-			}, 10*1000)
+			}, 24*60*60*1000)
 		} catch (e) {
 			receivedMessage.reply("An error has occured, please make sure the command has a time delimiter and message");
 			console.error(e.toString());
@@ -77,7 +77,7 @@ client.on('message', (receivedMessage) => {
 				// Creates the message
 				var content = "Bonjour citoyen, n'oublie pas de récupérer ta médaille de bravoure dans l'onglet guilde aujourd'hui et de donner de l'expérience ! Bonne route... "
 				client.channels.get(uprising).send(content);
-			}, 5*1000)
+			}, 24*60*60*1000)
 		} catch (e) {
 			receivedMessage.reply("An error has occured, please make sure the command has a time delimiter and message");
 			console.error(e.toString());
