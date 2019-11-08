@@ -55,12 +55,12 @@ client.on('message', (receivedMessage) => {
         if (receivedMessage.content.startsWith("!remindergo")) {
 		console.log("yes")
 	try{
-            client.setTimeout(function () {
+            setTimeout(function () {
 				// Creates the message
 				var content = "COUCOU JE SPAM"
 				receivedMessage.reply(content);
 				console.log('Message sent to');
-			}, 1000)
+			}, 5000)
 		} catch (e) {
 			receivedMessage.reply("An error has occured, please make sure the command has a time delimiter and message");
 			console.error(e.toString());
